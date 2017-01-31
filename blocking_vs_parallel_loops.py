@@ -25,6 +25,18 @@ def sequential_a_b():
 
 
 @asyncio.coroutine
+def main_overlap_a():
+    while True:
+        print('just launch a')
+        asyncio.ensure_future(a())
+
+        print('for loop in main')
+        for i in range(0, 5, 2):
+            print('b %d' % i)
+            yield from asyncio.sleep(2)
+
+
+@asyncio.coroutine
 def overlapping_a_b():
     while True:
         print('just launch a')
@@ -37,4 +49,4 @@ def overlapping_a_b():
 
 loop = asyncio.get_event_loop()
 # loop.run_until_complete(main())
-loop.run_until_complete(overlapping_a_b())
+loop.run_until_complete(main_overlap_a())
