@@ -5,6 +5,7 @@ import time
 loop = asyncio.get_event_loop()
 futures = []
 
+
 @asyncio.coroutine
 def asyncio_run():
     global futures
@@ -62,4 +63,3 @@ def start_services():
 
 if __name__ == "__main__":
     asyncio.get_event_loop().run_until_complete(asyncio.wait(start_services()))
-
